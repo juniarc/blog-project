@@ -1,4 +1,3 @@
-import ColoredButton from "@/_components/buttons/ColoredButton";
 import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
 import HeroSection from "@/_containers/home/hero/HeroSection";
 import Search from "@/_components/search/Search";
@@ -8,6 +7,7 @@ import { fetchPosts } from "@/api/gorestApi";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { usePosts } from "@/hooks/usePosts";
 import { useRouter } from "next/router";
+import NavigationButton from "@/_components/buttons/NavigationButton";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
@@ -37,7 +37,11 @@ export default function Home() {
       <HorizontalDivider className="mt-8 lg:mt-10" />
       <div className="mt-8 lg:mt-0 lg:flex lg:justify-between">
         <div className="lg:pt-10 lg:pr-10 lg:border-e lg:border-e-black lg:w-1/3 lg:min-h-screen">
-          <ColoredButton text="Create Blog" className="w-full" />
+          <NavigationButton
+            text="Create Blog"
+            href="/create-post"
+            className="w-full"
+          />
           <Search />
         </div>
         <HorizontalDivider className="mt-8 lg:hidden" />

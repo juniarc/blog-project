@@ -1,5 +1,5 @@
+import NavigationButton from "@/_components/buttons/NavigationButton";
 import Logo from "@/_components/logo/Logo";
-import TokenSection from "./TokenSection";
 
 export default function Header() {
   return (
@@ -8,7 +8,7 @@ export default function Header() {
         <div>
           <Logo />
         </div>
-        <TokenSection />
+        <NavigationButton text="Create User ID" href="/create-user" />
       </div>
     </header>
   );

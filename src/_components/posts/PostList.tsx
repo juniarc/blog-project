@@ -19,7 +19,7 @@ export default function PostList({
   isLoading,
 }: PostListProps) {
   return (
-    <div className="mt-5 lg:mt-10">
+    <div className="mt-5 lg:mt-10 h-full">
       {isLoading ? (
         Array.from({ length: pageSize ?? 5 }).map((_, index) => (
           <PostItemLoading key={index} />
