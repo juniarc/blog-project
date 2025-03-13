@@ -1,4 +1,4 @@
-import { BiSearch } from "react-icons/bi";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function Search() {
   return (
@@ -10,7 +10,7 @@ export default function Search() {
         placeholder="Search"
         className="text-sm w-full focus:outline-0"
       />
-      <BiSearch />
+      <SearchOutlined />
     </div>
   );
 }

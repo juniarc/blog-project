@@ -30,6 +30,7 @@ export default function PaginationButton({
         total={totalPages}
         pageSize={pageSize}
         showLessItems={deviceType === "mobile"}
+        showSizeChanger={false}
       />
     </div>
   );
