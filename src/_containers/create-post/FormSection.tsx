@@ -83,7 +83,7 @@ export default function FormSection() {
           </Form.Item>
 
           <Form.Item<FieldType>
-            label="TextArea"
+            label="Body"
             name="body"
             rules={[{ required: true, message: "Please input your content!" }]}
           >
