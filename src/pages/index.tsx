@@ -13,10 +13,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
   const page = Number(context.query.page) || 1;
+  const title = context.query.title?.toString() || undefined;
+  const body = context.query.body?.toString() || undefined;
 
   await queryClient.prefetchQuery({
-    queryKey: ["posts", page],
-    queryFn: () => fetchPosts(page),
+    queryKey: ["posts", title ?? null, body ?? null, page],
+    queryFn: () => fetchPosts(page, title, body),
   });
 
   return {
@@ -29,7 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Home() {
   const router = useRouter();
   const page = Number(router.query.page) || 0;
-  const { data, isLoading } = usePosts(page);
+  const title = router.query.title?.toString() || undefined;
+  const body = router.query.body?.toString() || undefined;
+  const { data, isLoading } = usePosts(page, title, body);
 
   return (
     <main className="px-4 md:px-5 lg:px-20 min-h-screen">
@@ -51,9 +55,11 @@ export default function Home() {
           </h2>
           <PostList
             posts={data?.posts || []}
-            totalPages={data?.totalPages || 0}
+            totalItems={data?.totalItems || 0}
             initialPage={page}
             isLoading={isLoading}
+            title={title}
+            body={body}
           />
         </div>
       </div>

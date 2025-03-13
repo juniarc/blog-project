@@ -2,9 +2,15 @@ import { PostBodyRequest, UserBodyRequest } from "@/types/types";
 import axiosInstance from "./axiosInstance";
 import { AxiosError } from "axios";
 
-export const fetchPosts = async (page: number = 1) => {
+export const fetchPosts = async (
+  page: number = 1,
+  title?: string,
+  body?: string
+) => {
   const { data, headers } = await axiosInstance.get("/posts", {
     params: {
+      title,
+      body,
       page,
       per_page: 5,
     },

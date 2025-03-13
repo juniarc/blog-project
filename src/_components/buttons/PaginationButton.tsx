@@ -3,19 +3,32 @@ import { Pagination } from "antd";
 import { useRouter } from "next/router";
 
 export default function PaginationButton({
-  totalPages,
+  totalItems,
   pageSize = 5,
   initialPage,
+  title,
+  body,
 }: {
-  totalPages: number;
+  totalItems: number;
   pageSize?: number;
   initialPage: number;
+  title?: string;
+  body?: string;
 }) {
   const router = useRouter();
   const { deviceType } = useScreenSizeContext();
 
+  // console.log(totalPages, "totalPages");
   const handleChange = (newPage: number) => {
-    router.push(`/?page=${newPage}`, undefined, { shallow: true });
+    router.push(
+      `/${title ? `?title=${title}` : ""}${
+        body ? `&body=${body}` : ""
+      }&page=${newPage}`,
+      undefined,
+      {
+        shallow: true,
+      }
+    );
 
     window.scrollTo({
       top: (document.getElementById("postlistTitle")?.offsetTop || 0) - 100,
@@ -27,7 +40,7 @@ export default function PaginationButton({
       <Pagination
         onChange={handleChange}
         defaultCurrent={initialPage}
-        total={totalPages}
+        total={totalItems}
         pageSize={pageSize}
         showLessItems={deviceType === "mobile"}
         showSizeChanger={false}

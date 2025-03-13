@@ -5,18 +5,22 @@ import { PostItemProps } from "@/types/types";
 
 export interface PostListProps {
   posts: PostItemProps[];
-  totalPages: number;
+  totalItems: number;
   pageSize?: number;
   initialPage: number;
   isLoading: boolean;
+  title?: string;
+  body?: string;
 }
 
 export default function PostList({
   posts,
-  totalPages,
+  totalItems,
   pageSize,
   initialPage,
   isLoading,
+  title,
+  body,
 }: PostListProps) {
   return (
     <div className="mt-5 lg:mt-10 h-full">
@@ -32,9 +36,11 @@ export default function PostList({
         </div>
       )}
       <PaginationButton
-        totalPages={totalPages}
+        totalItems={totalItems}
         pageSize={pageSize}
         initialPage={initialPage}
+        title={title}
+        body={body}
       />
     </div>
   );
