@@ -18,7 +18,6 @@ export default function PaginationButton({
   const router = useRouter();
   const { deviceType } = useScreenSizeContext();
 
-  // console.log(totalPages, "totalPages");
   const handleChange = (newPage: number) => {
     router.push(
       `/${title ? `?title=${title}` : ""}${

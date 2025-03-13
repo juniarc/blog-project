@@ -1,6 +1,5 @@
 import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
 import HeroSection from "@/_containers/home/hero/HeroSection";
-import Search from "@/_components/search/Search";
 import PostList from "@/_components/posts/PostList";
 import { GetServerSideProps } from "next";
 import { fetchPosts } from "@/api/gorestApi";
@@ -8,6 +7,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { usePosts } from "@/hooks/usePosts";
 import { useRouter } from "next/router";
 import NavigationButton from "@/_components/buttons/NavigationButton";
+import SearchSection from "@/_containers/home/search-section/SearchSection";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
@@ -46,7 +46,7 @@ export default function Home() {
             href="/create-post"
             className="w-full"
           />
-          <Search />
+          <SearchSection />
         </div>
         <HorizontalDivider className="mt-8 lg:hidden" />
         <div className="mt-8 lg:mt-0 lg:w-2/3 lg:p-10">
