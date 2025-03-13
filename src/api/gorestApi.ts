@@ -78,6 +78,21 @@ export const createUser = async (body: UserBodyRequest) => {
   }
 };
 
+export const editUser = async (body: UserBodyRequest, id: number) => {
+  try {
+    const { data } = await axiosInstance.put(`/users/${id}`, body);
+
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.data) {
+      throw axiosError.response.data;
+    }
+
+    throw new Error("Failed to create user");
+  }
+};
+
 export const fetchUsers = async () => {
   const { data } = await axiosInstance.get("/users");
 

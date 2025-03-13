@@ -6,7 +6,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import LeftContainer from "@/_containers/home/left/LeftContainer";
 import RightContainer from "@/_containers/home/right/RightContainer";
-import { useBLogs } from "@/hooks/useBlogs";
+import { useBlogs } from "@/hooks/useBlogs";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
@@ -34,7 +34,7 @@ export default function Home() {
   const title = router.query.title?.toString() || undefined;
   const body = router.query.body?.toString() || undefined;
 
-  const { data, isLoading } = useBLogs(page, title, body);
+  const { data, isLoading } = useBlogs(page, title, body);
 
   return (
     <main className="px-4 md:px-5 lg:px-20 min-h-screen">

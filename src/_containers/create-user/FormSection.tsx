@@ -10,27 +10,36 @@ import { useState } from "react";
 
 type FieldType = UserBodyRequest;
 
-export default function FormSection() {
-  const router = useRouter();
-  const { isSuccess, isError, isPending, mutate, error } = useCreateUser();
-  const [openAlert, setOpenAlert] = useState(false);
+interface FormSectionProps {
+  initialValues?: Partial<FieldType>;
+  submitText?: string;
+  onFinishHandler?: (values: FieldType) => void;
+  isRequired?: boolean;
+  isSuccess: boolean;
+  isError: boolean;
+  isPending: boolean;
+  error: any;
+  className?: string;
+  openAlert: boolean;
+  succesMessage: string;
+  failedMessaged: string;
+}
 
+export default function FormSection({
+  initialValues,
+  submitText = "Submit",
+  onFinishHandler,
+  isSuccess,
+  isError,
+  isPending,
+  error,
+  className = "w-1/2",
+  openAlert,
+  isRequired = true,
+  succesMessage,
+  failedMessaged,
+}: FormSectionProps) {
   const { Option } = Select;
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    mutate(
-      { ...values, status: "active" },
-      {
-        onSuccess: () => {
-          setOpenAlert(true);
-          router.back();
-        },
-        onError: () => {
-          setOpenAlert(true);
-          setTimeout(() => setOpenAlert(false), 3000);
-        },
-      }
-    );
-  };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -38,20 +47,44 @@ export default function FormSection() {
     console.log("Failed:", errorInfo);
   };
 
+  const renderAlert = () => {
+    if (!openAlert) return null;
+
+    if (isError) {
+      return (
+        <FailAlert
+          message={
+            error?.[0]?.message
+              ? `${error?.[0]?.field + " " + error?.[0]?.message}`
+              : failedMessaged
+          }
+        />
+      );
+    }
+
+    if (isSuccess) {
+      return <SuccessAlert message={succesMessage} />;
+    }
+
+    return null;
+  };
   return (
     <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
-      <div className="sm:w-1/2 ">
+      <div className={className}>
         <Form
           name="basic"
           layout="vertical"
-          onFinish={onFinish}
+          initialValues={initialValues}
+          onFinish={onFinishHandler}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item<FieldType>
             label="Name"
             name="name"
-            rules={[{ required: true, message: "Please input your name!" }]}
+            rules={[
+              { required: isRequired, message: "Please input your name!" },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -61,7 +94,7 @@ export default function FormSection() {
             hasFeedback
             rules={[
               {
-                required: true,
+                required: isRequired,
                 message: "Please input your email!",
                 type: "email",
               },
@@ -72,7 +105,9 @@ export default function FormSection() {
           <Form.Item
             name="gender"
             label="Gender"
-            rules={[{ required: true, message: "Please select your gender!" }]}
+            rules={[
+              { required: isRequired, message: "Please select your gender!" },
+            ]}
           >
             <Select placeholder="Please select a gender">
               <Option value="male">Male</Option>
@@ -80,33 +115,18 @@ export default function FormSection() {
             </Select>
           </Form.Item>
 
-          <div className="w-full flex justify-center">
+          <div className="w-full flex justify-center mb-3">
             <ColoredButton
               className={`${
                 isPending ? "bg-gray-200! border-0!" : ""
               } w-full lg:w-1/3 mt-5`}
-              text={isPending ? <Spin /> : "Submit"}
+              text={isPending ? <Spin /> : submitText}
               htmlType="submit"
               disabled={isPending}
             />
           </div>
         </Form>
-        {openAlert && isError && (
-          <div className="mt-5">
-            <FailAlert
-              message={
-                error?.[0]?.message
-                  ? `${error?.[0]?.field + " " + error?.[0]?.message}`
-                  : "Failed to create user"
-              }
-            />
-          </div>
-        )}
-        {openAlert && isSuccess && (
-          <div className="mt-5">
-            <SuccessAlert message="Successfully create user" />
-          </div>
-        )}
+        {renderAlert()}
       </div>
     </div>
   );

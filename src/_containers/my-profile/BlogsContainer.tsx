@@ -5,14 +5,12 @@ import BlogList from "@/_components/blogs/BlogList";
 
 export default function BlogsContainer({
   isUserLoading,
-  name,
   data,
   isBlogError,
   page,
   isBlogLoading,
 }: {
   isUserLoading: boolean;
-  name: string | undefined;
   isBlogError: boolean;
   isBlogLoading: boolean;
   data: GetBlogsResponse | undefined;
@@ -27,13 +25,13 @@ export default function BlogsContainer({
         </>
       ) : (
         <h2 className="font-bold text-3xl lg:text-5xl lg:mt-[62px] capitalize">
-          {name}&apos;s Blog
+          Your Blogs
         </h2>
       )}
       <div>
         {isBlogError || data?.totalItems === 0 ? (
           <div className="flex items-center justify-center px-4 mt-20">
-            <NotFound text="This user hasn’t posted anything yet." />
+            <NotFound text="You haven’t posted anything yet." />
           </div>
         ) : (
           <BlogList

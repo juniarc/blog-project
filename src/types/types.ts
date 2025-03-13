@@ -20,7 +20,7 @@ export interface GetBlogsResponse {
 export interface UserBodyRequest {
   name: string;
   email: string;
-  gender: "male" | "female";
+  gender: string;
   status: "active" | "inactive";
 }
 

@@ -1,45 +1,17 @@
 import NotFound from "@/_containers/not-found.tsx/NotFound";
-import { fetchUserById, fetchUserBlogs } from "@/api/gorestApi";
 import { useUserDetail } from "@/hooks/useUserDetail";
 import { useUserBlogs } from "@/hooks/useUserBlogs";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import BlogsContainer from "@/_containers/user/BlogsContainer";
-import UserDetailContainer from "@/_containers/user/UserDetailContainer";
+import BlogsContainer from "@/_containers/my-profile/BlogsContainer";
+import UserDetailContainer from "@/_containers/my-profile/UserDetailContainer";
 import SingleLoading from "@/_components/loadings/SingleLoading";
 import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
+import { getCookie } from "cookies-next";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const queryClient = new QueryClient();
+export default function MyProfilePage() {
+  const id = Number(getCookie("userId"));
 
-  const id = Number(context.params?.userId);
-  const page = Number(context.query.page) || 1;
-
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ["user", id],
-      queryFn: () => fetchUserById(id),
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ["blogs", id, page],
-      queryFn: () => fetchUserBlogs(page, id),
-    }),
-  ]);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-};
-
-export default function BlogDetail() {
   const router = useRouter();
-
-  const pathArray = router.asPath.split("/").filter((path) => path);
-  const lastPath = pathArray[pathArray.length - 1];
-  const id = decodeURIComponent(lastPath);
 
   const {
     data: user,
@@ -69,12 +41,11 @@ export default function BlogDetail() {
           {isUserLoading ? (
             <SingleLoading className="w-[70vw] md:w-96 h-5" />
           ) : (
-            <BreadcrumbNav pathname={`users/${user.name}`} />
+            <BreadcrumbNav pathname="my-profile" />
           )}
           <UserDetailContainer {...user} isUserLoading={isUserLoading} />
         </div>
         <BlogsContainer
-          name={user?.name}
           data={blogs}
           isBlogError={isBlogError}
           isBlogLoading={isBlogLoading}
