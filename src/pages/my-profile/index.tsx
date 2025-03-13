@@ -37,7 +37,7 @@ export default function MyProfilePage() {
   return (
     <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
       <div className="w-full lg:flex">
-        <div className="lg:w-1/3 lg:h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
+        <div className="lg:w-1/3 lg:min-h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
           {isUserLoading ? (
             <SingleLoading className="w-[70vw] md:w-96 h-5" />
           ) : (

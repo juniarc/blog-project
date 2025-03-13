@@ -1,10 +1,10 @@
 import OutlinedButton from "@/_components/buttons/OutlinedButton";
 import { Modal } from "antd";
 import { useState } from "react";
-import FormSection from "../create-user/FormSection";
 import { User, UserBodyRequest } from "@/types/types";
 import { useEditUser } from "@/hooks/useEditUser";
 import { useQueryClient } from "@tanstack/react-query";
+import UserForm from "@/_components/forms/UserForm";
 
 export default function EditProfileContainer({ user }: { user: User }) {
   const queryClient = useQueryClient();
@@ -30,7 +30,6 @@ export default function EditProfileContainer({ user }: { user: User }) {
     );
   };
 
-  const handleOk = () => {};
   return (
     <div className="flex justify-end lg:mt-5">
       <OutlinedButton
@@ -40,14 +39,13 @@ export default function EditProfileContainer({ user }: { user: User }) {
       <Modal
         title="Edit Profile"
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={() => setModalOpen(false)}
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{ hidden: true }}
         centered
         destroyOnClose
       >
-        <FormSection
+        <UserForm
           className="w-full"
           openAlert={openAlert}
           isPending={isPending}

@@ -12,6 +12,7 @@ export interface BlogListProps {
   otherLoading?: boolean;
   title?: string;
   body?: string;
+  additionalChildren?: boolean;
 }
 
 export default function BlogList({
@@ -23,6 +24,7 @@ export default function BlogList({
   otherLoading = false,
   title,
   body,
+  additionalChildren,
 }: BlogListProps) {
   return (
     <div className="mt-5 lg:mt-10 h-full">
@@ -33,7 +35,11 @@ export default function BlogList({
       ) : (
         <div className="flex flex-col gap-4">
           {blogs?.map((blog) => (
-            <BlogItem key={blog.id} {...blog} />
+            <BlogItem
+              key={blog.id}
+              {...blog}
+              additionalChildren={additionalChildren}
+            />
           ))}
         </div>
       )}

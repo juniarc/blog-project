@@ -104,3 +104,33 @@ export const fetchUserById = async (id: number) => {
 
   return data;
 };
+
+export const editUserBlog = async (id: number, body: BlogBodyRequest) => {
+  try {
+    const { data } = await axiosInstance.put(`/posts/${id}`, body);
+
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.data) {
+      throw axiosError.response.data;
+    }
+
+    throw new Error("Failed to create user");
+  }
+};
+
+export const deleteUserBlog = async (id: number) => {
+  try {
+    const { data } = await axiosInstance.delete(`/posts/${id}`);
+
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.data) {
+      throw axiosError.response.data;
+    }
+
+    throw new Error("Failed to create user");
+  }
+};

@@ -1,8 +1,19 @@
 import { Blog } from "@/types/types";
 import { useRouter } from "next/router";
+import Additional from "./additional/Additional";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function BlogItem({ id, user_id, title, body }: Blog) {
+interface BlogItemProps extends Blog {
+  additionalChildren?: boolean;
+}
+
+export default function BlogItem({
+  id,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  user_id,
+  title,
+  body,
+  additionalChildren,
+}: BlogItemProps) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -15,12 +26,17 @@ export default function BlogItem({ id, user_id, title, body }: Blog) {
         <p className="text-gray-400 text-xs lg:text-base line-clamp-3 text-justify group-hover:text-black transition ease-in-out duration-300">
           {body}
         </p>
-        <button
-          onClick={handleClick}
-          className="text-black text-xs lg:text-base font-semibold mt-3 bg-white cursor-pointer hover:underline trasnition"
-        >
-          Show more
-        </button>
+        <div className="flex justify-between items-center mt-3">
+          <button
+            onClick={handleClick}
+            className="text-black text-xs lg:text-base font-semibold bg-white cursor-pointer hover:underline transition"
+          >
+            Show more
+          </button>
+          {additionalChildren && (
+            <Additional blog={{ id, user_id, body, title }} />
+          )}
+        </div>
       </div>
     </div>
   );

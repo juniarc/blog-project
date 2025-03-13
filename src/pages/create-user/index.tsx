@@ -1,5 +1,5 @@
 import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
-import FormSection from "@/_containers/create-user/FormSection";
+import UserForm from "@/_components/forms/UserForm";
 import { useCreateUser } from "@/hooks/useCreateUser";
 import { UserBodyRequest } from "@/types/types";
 import { useRouter } from "next/router";
@@ -37,7 +37,7 @@ export default function CreateUserPage() {
             Create User
           </h2>
           <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
-            <FormSection
+            <UserForm
               className="w-1/2"
               openAlert={openAlert}
               isPending={isPending}

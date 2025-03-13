@@ -1,16 +1,15 @@
 import FailAlert from "@/_components/alerts/FailAlert";
 import SuccessAlert from "@/_components/alerts/SuccesAlert";
 import ColoredButton from "@/_components/buttons/ColoredButton";
-import { useCreateUser } from "@/hooks/useCreateUser";
-import { UserBodyRequest } from "@/types/types";
-import { Form, Input, Select, Spin } from "antd";
+import NavigationModal from "@/_components/modals/NavigationModal";
+import { BlogBodyRequest } from "@/types/types";
+import { Form, Input, Spin } from "antd";
 import { FormProps } from "antd";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import TextArea from "antd/es/input/TextArea";
 
-type FieldType = UserBodyRequest;
+type FieldType = BlogBodyRequest;
 
-interface FormSectionProps {
+interface BlogFormProps {
   initialValues?: Partial<FieldType>;
   submitText?: string;
   onFinishHandler?: (values: FieldType) => void;
@@ -18,14 +17,17 @@ interface FormSectionProps {
   isSuccess: boolean;
   isError: boolean;
   isPending: boolean;
-  error: any;
+  error: unknown;
   className?: string;
   openAlert: boolean;
   succesMessage: string;
   failedMessaged: string;
+  isModalOpen?: boolean;
+  handleOpenModal: () => void;
+  handleCloseModal: () => void;
 }
 
-export default function FormSection({
+export default function BlogForm({
   initialValues,
   submitText = "Submit",
   onFinishHandler,
@@ -38,9 +40,10 @@ export default function FormSection({
   isRequired = true,
   succesMessage,
   failedMessaged,
-}: FormSectionProps) {
-  const { Option } = Select;
-
+  isModalOpen,
+  handleCloseModal,
+  handleOpenModal,
+}: BlogFormProps) {
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
   ) => {
@@ -68,6 +71,7 @@ export default function FormSection({
 
     return null;
   };
+
   return (
     <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
       <div className={className}>
@@ -80,39 +84,23 @@ export default function FormSection({
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="Name"
-            name="name"
+            label="Title"
+            name="title"
             rules={[
               { required: isRequired, message: "Please input your name!" },
             ]}
           >
-            <Input />
+            <Input maxLength={50} showCount />
           </Form.Item>
+
           <Form.Item<FieldType>
-            label="Email"
-            name="email"
-            hasFeedback
+            label="Body"
+            name="body"
             rules={[
-              {
-                required: isRequired,
-                message: "Please input your email!",
-                type: "email",
-              },
+              { required: isRequired, message: "Please input your content!" },
             ]}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="gender"
-            label="Gender"
-            rules={[
-              { required: isRequired, message: "Please select your gender!" },
-            ]}
-          >
-            <Select placeholder="Please select a gender">
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-            </Select>
+            <TextArea className="h-96" rows={4} maxLength={500} showCount />
           </Form.Item>
 
           <div className="w-full flex justify-center mb-3">
@@ -126,6 +114,13 @@ export default function FormSection({
             />
           </div>
         </Form>
+        {isModalOpen && (
+          <NavigationModal
+            isModalOpen={isModalOpen}
+            handleOK={handleOpenModal}
+            handleCancel={handleCloseModal}
+          />
+        )}
         {renderAlert()}
       </div>
     </div>
