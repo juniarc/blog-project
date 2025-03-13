@@ -33,17 +33,9 @@ export default function Additional({ blog }: { blog: Blog }) {
       {
         onSuccess: () => {
           setOpenAlert(true);
-          queryClient.setQueryData(
-            ["blogs", blog.user_id, page],
-            (oldData: GetBlogsResponse) => {
-              return {
-                ...oldData,
-                blogs: oldData.blogs.filter(
-                  (item: Blog) => blog.id !== item.id
-                ),
-              };
-            }
-          );
+          queryClient.invalidateQueries({
+            queryKey: ["blogs", blog.user_id, page],
+          });
 
           setTimeout(() => setDeleteModal(false), 2000);
         },

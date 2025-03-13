@@ -21,7 +21,9 @@ export default function BlogItem({
   };
   return (
     <div className="w-full min-h-44 p-5 lg:p-10 border border-gray-200 rounded-lg group hover:border-black transition ease-in-out duration-300">
-      <p className="font-bold text-xl lg:text-4xl line-clamp-2">{title}</p>
+      <p className="font-bold text-xl lg:text-4xl line-clamp-2 capitalize">
+        {title}
+      </p>
       <div className="mt-3">
         <p className="text-gray-400 text-xs lg:text-base line-clamp-3 text-justify group-hover:text-black transition ease-in-out duration-300">
           {body}
