@@ -1,8 +1,20 @@
-export interface PostItemProps {
+export interface Blog {
   id: number;
   user_id: number;
   title: string;
   body: string;
+}
+
+export interface BlogBodyRequest {
+  user_id: number | null;
+  title: string;
+  body: string;
+}
+
+export interface GetBlogsResponse {
+  blogs: Blog[];
+  totalItems: number;
+  totalPages: number;
 }
 
 export interface UserBodyRequest {
@@ -10,12 +22,6 @@ export interface UserBodyRequest {
   email: string;
   gender: "male" | "female";
   status: "active" | "inactive";
-}
-
-export interface PostBodyRequest {
-  user_id: number | null;
-  title: string;
-  body: string;
 }
 
 export interface User {

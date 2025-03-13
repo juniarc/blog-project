@@ -20,9 +20,9 @@ export default function PaginationButton({
 
   const handleChange = (newPage: number) => {
     router.push(
-      `/${title ? `?title=${title}` : ""}${
-        body ? `&body=${body}` : ""
-      }&page=${newPage}`,
+      `${title ? `?title=${title}` : ""}${body ? `&body=${body}` : ""}${
+        title || body ? `&page=${newPage}` : `?page=${newPage}`
+      }`,
       undefined,
       {
         shallow: true,
@@ -30,7 +30,7 @@ export default function PaginationButton({
     );
 
     window.scrollTo({
-      top: (document.getElementById("postlistTitle")?.offsetTop || 0) - 100,
+      top: (document.getElementById("bloglistTitle")?.offsetTop || 0) - 100,
       behavior: "smooth",
     });
   };

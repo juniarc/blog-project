@@ -1,8 +1,8 @@
-import { createPost } from "@/api/gorestApi";
+import { createBlog } from "@/api/gorestApi";
 import { useMutation } from "@tanstack/react-query";
 
 export const useCreateBlog = () => {
   return useMutation({
-    mutationFn: createPost,
+    mutationFn: createBlog,
   });
 };

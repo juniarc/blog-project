@@ -1,8 +1,8 @@
 import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
-import FormSection from "@/_containers/create-post/FormSection";
+import FormSection from "@/_containers/create-blog/FormSection";
 import { useRouter } from "next/router";
 
-export default function CreatePostPage() {
+export default function CreateBlogPage() {
   const router = useRouter();
 
   return (

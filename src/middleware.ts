@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
-  if (url.pathname === "/posts") {
+  if (url.pathname === "/blogs") {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
@@ -11,5 +11,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: "/posts",
+  matcher: "/blogs",
 };

@@ -1,8 +1,8 @@
-import { PostBodyRequest, UserBodyRequest } from "@/types/types";
+import { BlogBodyRequest, UserBodyRequest } from "@/types/types";
 import axiosInstance from "./axiosInstance";
 import { AxiosError } from "axios";
 
-export const fetchPosts = async (
+export const fetchBlogs = async (
   page: number = 1,
   title?: string,
   body?: string
@@ -17,13 +17,13 @@ export const fetchPosts = async (
   });
 
   return {
-    posts: data,
+    blogs: data,
     totalItems: Number(headers["x-pagination-total"]),
     totalPages: Number(headers["x-pagination-pages"]),
   };
 };
 
-export const fetchUserPosts = async (page: number = 1, userId: number) => {
+export const fetchUserBlogs = async (page: number = 1, userId: number) => {
   const { data, headers } = await axiosInstance.get(`/users/${userId}/posts`, {
     params: {
       page,
@@ -32,19 +32,20 @@ export const fetchUserPosts = async (page: number = 1, userId: number) => {
   });
 
   return {
-    posts: data,
+    blogs: data,
     totalItems: Number(headers["x-pagination-total"]),
     totalPages: Number(headers["x-pagination-pages"]),
   };
 };
 
-export const fetchPostById = async (id: number) => {
+export const fetchBlogById = async (id: number) => {
+  console.log(id);
   const { data } = await axiosInstance.get(`/posts/${id}`);
 
   return data;
 };
 
-export const createPost = async (body: PostBodyRequest) => {
+export const createBlog = async (body: BlogBodyRequest) => {
   try {
     const { data } = await axiosInstance.post(
       `/users/${body.user_id}/posts`,

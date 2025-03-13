@@ -1,37 +1,39 @@
 import PaginationButton from "../buttons/PaginationButton";
-import PostItemLoading from "../loadings/PostItemLoading";
-import PostItem from "./PostItem";
-import { PostItemProps } from "@/types/types";
+import BlogItemLoading from "../loadings/BlogItemLoading";
+import BlogItem from "./BlogItem";
+import { Blog } from "@/types/types";
 
-export interface PostListProps {
-  posts: PostItemProps[];
+export interface BlogListProps {
+  blogs: Blog[] | undefined;
   totalItems: number;
   pageSize?: number;
   initialPage: number;
   isLoading: boolean;
+  otherLoading?: boolean;
   title?: string;
   body?: string;
 }
 
-export default function PostList({
-  posts,
+export default function BlogList({
+  blogs,
   totalItems,
   pageSize,
   initialPage,
   isLoading,
+  otherLoading = false,
   title,
   body,
-}: PostListProps) {
+}: BlogListProps) {
   return (
     <div className="mt-5 lg:mt-10 h-full">
-      {isLoading ? (
+      {isLoading || otherLoading ? (
         Array.from({ length: pageSize ?? 5 }).map((_, index) => (
-          <PostItemLoading key={index} />
+          <BlogItemLoading key={index} />
         ))
       ) : (
         <div className="flex flex-col gap-4">
-          {posts.map((post) => (
-            <PostItem key={post.id} {...post} />
+          {blogs?.map((blog) => (
+            <BlogItem key={blog.id} {...blog} />
           ))}
         </div>
       )}

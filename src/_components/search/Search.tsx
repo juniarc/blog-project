@@ -25,7 +25,7 @@ export default function Search({
         className="text-sm w-full focus:outline-0"
         onChange={(e) => setInput(e.target.value)}
       />
-      <button type="submit">
+      <button type="submit" aria-label="Submit search">
         <SearchOutlined />
       </button>
     </form>

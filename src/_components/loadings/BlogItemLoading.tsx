@@ -1,4 +1,4 @@
-export default function PostItemLoading() {
+export default function BlogItemLoading() {
   return (
     <div className="w-full md:h-72 p-5 lg:p-10 border border-gray-200 rounded-lg cursor-pointer group hover:border-black transition ease-in-out duration-300">
       <div className="w-full h-6 md:h-9 bg-gray-200 animate-pulse rounded md:rounded-lg"></div>

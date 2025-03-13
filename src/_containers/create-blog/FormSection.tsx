@@ -3,14 +3,14 @@ import SuccessAlert from "@/_components/alerts/SuccesAlert";
 import ColoredButton from "@/_components/buttons/ColoredButton";
 import NavigationModal from "@/_components/modals/NavigationModal";
 import { useCreateBlog } from "@/hooks/useCreateBlog";
-import { PostBodyRequest } from "@/types/types";
+import { BlogBodyRequest } from "@/types/types";
 import { Form, Input, Spin } from "antd";
 import { FormProps } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-type FieldType = PostBodyRequest;
+type FieldType = BlogBodyRequest;
 
 export default function FormSection() {
   const router = useRouter();
@@ -114,14 +114,14 @@ export default function FormSection() {
               message={
                 error?.[0]?.message
                   ? `${error?.[0]?.field + " " + error?.[0]?.message}`
-                  : "Failed to create user"
+                  : "Failed to create blog"
               }
             />
           </div>
         )}
         {openAlert && isSuccess && (
           <div className="mt-5">
-            <SuccessAlert message="Successfully create user" />
+            <SuccessAlert message="Successfully create blog" />
           </div>
         )}
       </div>

@@ -1,12 +1,12 @@
-import { PostItemProps } from "@/types/types";
+import { Blog } from "@/types/types";
 import { useRouter } from "next/router";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function PostItem({ id, user_id, title, body }: PostItemProps) {
+export default function BlogItem({ id, user_id, title, body }: Blog) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/posts/${id}`);
+    router.push(`/blogs/${id}`);
   };
   return (
     <div className="w-full min-h-44 p-5 lg:p-10 border border-gray-200 rounded-lg group hover:border-black transition ease-in-out duration-300">
