@@ -6,7 +6,6 @@ import { User, UserBodyRequest } from "@/types/types";
 import { useEditUser } from "@/hooks/user/useEditUser";
 import { useAuth } from "@/providers/AuthProvider";
 import UserForm from "@/_components/forms/UserForm";
-import OutlinedButton from "@/_components/buttons/OutlinedButton";
 
 export default function EditProfileContainer({ user }: { user: User }) {
   const router = useRouter();
@@ -37,15 +36,12 @@ export default function EditProfileContainer({ user }: { user: User }) {
 
   const handleLogout = () => {
     deleteUser();
-    router.push("/");
+    router.push("/", undefined, { shallow: true });
   };
 
   return (
     <div className="flex justify-end mt-5 lg:mt-10 gap-5">
-      <OutlinedButton
-        text="Edit Profile"
-        handleClick={() => setModalOpen(true)}
-      />
+      <Button onClick={() => setModalOpen(true)}>Edit Profile</Button>
       <Modal
         title="Edit Profile"
         open={isModalOpen}

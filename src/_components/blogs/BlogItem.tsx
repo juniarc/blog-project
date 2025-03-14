@@ -16,7 +16,7 @@ export default function BlogItem({
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/blogs/${id}`);
+    router.push(`/blogs/${id}`, undefined, { shallow: true });
   };
   return (
     <div className="w-full min-h-44 p-5 lg:p-10 border border-gray-200 rounded-lg group hover:border-black transition ease-in-out duration-300">

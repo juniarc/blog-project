@@ -1,6 +1,5 @@
-import ColoredButton from "@/_components/buttons/ColoredButton";
 import { UserBodyRequest } from "@/types/types";
-import { Form, Input, Select, Spin } from "antd";
+import { Button, Form, Input, Select, Spin } from "antd";
 import { FormProps } from "antd";
 import AlertRenderer from "../alerts/AlertRenderer";
 
@@ -91,14 +90,14 @@ export default function UserForm({
           </Form.Item>
 
           <div className="w-full flex justify-center mb-3">
-            <ColoredButton
-              className={`${
-                isPending ? "bg-gray-200! border-0!" : ""
-              } w-full lg:w-1/3 mt-5`}
-              text={isPending ? <Spin /> : submitText}
+            <Button
               htmlType="submit"
               disabled={isPending}
-            />
+              className="w-full lg:w-1/3 mt-5"
+              type="primary"
+            >
+              {isPending ? <Spin /> : submitText}
+            </Button>
           </div>
         </Form>
         <AlertRenderer

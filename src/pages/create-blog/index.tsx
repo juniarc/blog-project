@@ -35,7 +35,7 @@ export default function CreateBlogPage() {
         {
           onSuccess: () => {
             setOpenAlert(true);
-            router.push("/");
+            router.push("/", undefined, { shallow: true });
           },
           onError: () => {
             setOpenAlert(true);

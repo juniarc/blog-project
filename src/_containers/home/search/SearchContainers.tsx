@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 export default function SearchContainer() {
   const router = useRouter();
   const handleSearchTitle = (value: string) => {
-    router.push(`/?title=${value}`);
+    router.push(`/?title=${value}`, undefined, { shallow: true });
   };
   const handleSearchBody = (value: string) => {
-    router.push(`/?body=${value}`);
+    router.push(`/?body=${value}`, undefined, { shallow: true });
   };
   return (
     <div className="mt-5">
