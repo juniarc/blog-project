@@ -15,6 +15,7 @@ import { useBlogDetail } from "@/hooks/blog/useBlogDetail";
 import { useUserDetail } from "@/hooks/user/useUserDetail";
 import { useGetBlogComments } from "@/hooks/blog/useGetBlogComments";
 import { getLastPathSegment } from "@/utils/utils";
+import Head from "next/head";
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -70,20 +71,26 @@ export default function BlogDetail() {
   }
 
   return (
-    <main className="px-4 md:px-5 lg:px-20 min-h-screen">
-      <div className="my-5">
-        <NavTrail isLoading={isLoading} title={data?.title} />
-        <div className="w-full mt-10 lg:mt-20 lg:flex lg:gap-10">
-          <AuthorName isLoading={isLoading} user_id={data?.user_id} />
-          <BlogContent
-            isLoading={isLoading}
-            {...data}
-            user={userData}
-            comments={commentsData || []}
-            isCommentsLoading={isCommentsLoading}
-          />
+    <>
+      <Head>
+        <title>{data ? data?.title : "Loading..."}</title>
+        <meta name="description" content={data ? data?.body : "Loading...."} />
+      </Head>
+      <main className="px-4 md:px-5 lg:px-20 min-h-screen">
+        <div className="my-5">
+          <NavTrail isLoading={isLoading} title={data?.title} />
+          <div className="w-full mt-10 lg:mt-20 lg:flex lg:gap-10">
+            <AuthorName isLoading={isLoading} user_id={data?.user_id} />
+            <BlogContent
+              isLoading={isLoading}
+              {...data}
+              user={userData}
+              comments={commentsData || []}
+              isCommentsLoading={isCommentsLoading}
+            />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

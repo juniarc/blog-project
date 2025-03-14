@@ -6,6 +6,7 @@ import BlogsContainer from "@/_containers/my-profile/BlogsContainer";
 import UserDetailContainer from "@/_containers/my-profile/UserDetailContainer";
 import { getCookie } from "cookies-next";
 import NavTrail from "@/_containers/my-profile/NavTrail";
+import Head from "next/head";
 
 export default function MyProfilePage() {
   const id = Number(getCookie("userId"));
@@ -34,20 +35,26 @@ export default function MyProfilePage() {
   }
 
   return (
-    <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
-      <div className="w-full lg:flex">
-        <div className="lg:w-1/3 lg:min-h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
-          <NavTrail isLoading={isUserLoading} />
-          <UserDetailContainer {...user} isUserLoading={isUserLoading} />
+    <>
+      <Head>
+        <title>My Profile</title>
+        <meta name="description" content="Manage your profile" />
+      </Head>
+      <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
+        <div className="w-full lg:flex">
+          <div className="lg:w-1/3 lg:min-h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
+            <NavTrail isLoading={isUserLoading} />
+            <UserDetailContainer {...user} isUserLoading={isUserLoading} />
+          </div>
+          <BlogsContainer
+            data={blogs}
+            isBlogError={isBlogError}
+            isBlogLoading={isBlogLoading}
+            page={page}
+            isUserLoading={isUserLoading}
+          />
         </div>
-        <BlogsContainer
-          data={blogs}
-          isBlogError={isBlogError}
-          isBlogLoading={isBlogLoading}
-          page={page}
-          isUserLoading={isUserLoading}
-        />
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

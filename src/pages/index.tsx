@@ -10,6 +10,7 @@ import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
 import HeroSection from "@/_containers/home/hero/HeroSection";
 import ButtonsContainer from "@/_containers/home/buttons/ButtonsContainer";
 import BlogsContainer from "@/_containers/home/blogs/BlogsContainer";
+import Head from "next/head";
 
 const getQueryParams = (context: GetServerSidePropsContext | NextRouter) => {
   const page = Number(context.query.page) || 1;
@@ -29,9 +30,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     queryFn: () => fetchBlogs(page, title, body),
   });
 
+  const test = dehydrate(queryClient);
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      dehydratedState: test,
     },
   };
 };
@@ -43,20 +45,29 @@ export default function Home() {
   const { data, isLoading } = useBlogs(page, title, body);
 
   return (
-    <main className="px-4 md:px-5 lg:px-20 min-h-screen">
-      <HeroSection />
-      <HorizontalDivider className="mt-8 lg:mt-10" />
-      <div className="mt-8 lg:mt-0 lg:flex lg:justify-between">
-        <ButtonsContainer />
-        <HorizontalDivider className="mt-8 lg:hidden" />
-        <BlogsContainer
-          data={data}
-          initialPage={page}
-          isLoading={isLoading}
-          titleQuery={title}
-          bodyQuery={body}
+    <>
+      <Head>
+        <title>BLOG</title>
+        <meta
+          name="description"
+          content="Welcome to My Website. Explore the world of bloggin. Share your thoughts and ideas with the world."
         />
-      </div>
-    </main>
+      </Head>
+      <main className="px-4 md:px-5 lg:px-20 min-h-screen">
+        <HeroSection />
+        <HorizontalDivider className="mt-8 lg:mt-10" />
+        <div className="mt-8 lg:mt-0 lg:flex lg:justify-between">
+          <ButtonsContainer />
+          <HorizontalDivider className="mt-8 lg:hidden" />
+          <BlogsContainer
+            data={data}
+            initialPage={page}
+            isLoading={isLoading}
+            titleQuery={title}
+            bodyQuery={body}
+          />
+        </div>
+      </main>
+    </>
   );
 }

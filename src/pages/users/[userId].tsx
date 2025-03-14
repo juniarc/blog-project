@@ -9,6 +9,7 @@ import NotFound from "@/_containers/not-found.tsx/NotFound";
 import BlogsContainer from "@/_containers/user/BlogsContainer";
 import UserDetailContainer from "@/_containers/user/UserDetailContainer";
 import NavTrail from "@/_containers/user/NavTrail";
+import Head from "next/head";
 
 const getQueryParams = (context: GetServerSidePropsContext) => {
   const id = Number(context.params?.userId);
@@ -67,21 +68,30 @@ export default function BlogDetail() {
   }
 
   return (
-    <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
-      <div className="w-full lg:flex">
-        <div className="lg:w-1/3 lg:h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
-          <NavTrail isUserLoading={isUserLoading} name={user?.name} />
-          <UserDetailContainer {...user} isUserLoading={isUserLoading} />
-        </div>
-        <BlogsContainer
-          name={user?.name}
-          data={blogs}
-          isBlogError={isBlogError}
-          isBlogLoading={isBlogLoading}
-          page={page}
-          isUserLoading={isUserLoading}
+    <>
+      <Head>
+        <title>{user ? `${user?.name}'s Profile` : "Loading..."}</title>
+        <meta
+          name="description"
+          content={user ? `${user?.name}'s Profile` : "Loading...."}
         />
-      </div>
-    </main>
+      </Head>
+      <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
+        <div className="w-full lg:flex">
+          <div className="lg:w-1/3 lg:h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
+            <NavTrail isUserLoading={isUserLoading} name={user?.name} />
+            <UserDetailContainer {...user} isUserLoading={isUserLoading} />
+          </div>
+          <BlogsContainer
+            name={user?.name}
+            data={blogs}
+            isBlogError={isBlogError}
+            isBlogLoading={isBlogLoading}
+            page={page}
+            isUserLoading={isUserLoading}
+          />
+        </div>
+      </main>
+    </>
   );
 }

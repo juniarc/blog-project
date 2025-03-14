@@ -6,6 +6,7 @@ import theme from "@/styles/theme/themeConfig";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConfigProvider } from "antd";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 import { Open_Sans } from "next/font/google";
 
 const openSans = Open_Sans({
@@ -19,6 +20,12 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ConfigProvider theme={theme}>
+      <Head>
+        <title>BLOG</title>
+        <meta name="description" content="Welcome to My Website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <ScreenSizeProvider>
