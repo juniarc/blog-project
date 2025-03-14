@@ -1,4 +1,5 @@
 import Layout from "@/_layouts/Layout";
+import { AuthProvider } from "@/providers/AuthProvider";
 import { ScreenSizeProvider } from "@/providers/ScreenSizeProvider";
 import "@/styles/globals.css";
 import theme from "@/styles/theme/themeConfig";
@@ -18,13 +19,15 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ConfigProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <ScreenSizeProvider>
-          <Layout className={openSans.className}>
-            <Component {...pageProps} />
-          </Layout>
-        </ScreenSizeProvider>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <ScreenSizeProvider>
+            <Layout className={openSans.className}>
+              <Component {...pageProps} />
+            </Layout>
+          </ScreenSizeProvider>
+        </QueryClientProvider>
+      </AuthProvider>
     </ConfigProvider>
   );
 }

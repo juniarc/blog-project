@@ -1,15 +1,9 @@
 import NavigationButton from "@/_components/buttons/NavigationButton";
 import Logo from "@/_components/logo/Logo";
-import { User } from "@/types/types";
-import { getCookie } from "cookies-next";
-import { useEffect, useState } from "react";
+import { useAuth } from "@/providers/AuthProvider";
 
 export default function Header() {
-  const [userId, setUserId] = useState<User["id"] | null>(null);
-  useEffect(() => {
-    const idFromCookie = getCookie("userId");
-    setUserId(Number(idFromCookie));
-  }, [userId]);
+  const { userId } = useAuth();
 
   return (
     <header className="w-screen bg-white border-b border-b-black sticky top-0 left-0 z-50">

@@ -43,7 +43,6 @@ export default function BlogForm({
   failedMessaged,
   isModalOpen,
   handleCloseModal,
-  handleOpenModal,
 }: BlogFormProps) {
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
     errorInfo
@@ -120,7 +119,7 @@ export default function BlogForm({
         {isModalOpen && (
           <NavigationModal
             isModalOpen={isModalOpen}
-            handleOK={handleOpenModal}
+            handleOK={handleCloseModal}
             handleCancel={handleCloseModal}
           />
         )}
