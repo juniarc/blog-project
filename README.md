@@ -1,5 +1,9 @@
 # Blog Application
 
+## ❗ IMPORTANT NOTE ❗
+
+Before starting, please be aware that some user details may not be found due to an issue with the Gorest API. It is recommended to find the user details from the users you have created.
+
 ## Web link
 
 https://blog-project-ten-mu.vercel.app/
