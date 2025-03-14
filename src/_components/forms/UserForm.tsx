@@ -15,7 +15,7 @@ interface UserFormProps {
   isSuccess: boolean;
   isError: boolean;
   isPending: boolean;
-  error: any;
+  error: unknown;
   className?: string;
   openAlert: boolean;
   succesMessage: string;

@@ -1,7 +1,7 @@
 import ConfirmationModal from "@/_components/modals/ConfirmationModal";
 import BlogForm from "@/_components/forms/BlogForm";
 import { useEditBlog } from "@/hooks/useEditBlog";
-import { BlogBodyRequest, Blog, GetBlogsResponse } from "@/types/types";
+import { BlogBodyRequest, Blog } from "@/types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button, Modal, Spin } from "antd";
 import { useState } from "react";

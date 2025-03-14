@@ -55,17 +55,10 @@ export default function BlogDetail() {
   const id = decodeURIComponent(lastPath);
 
   const { data, isError, isLoading } = useBlogDetail(Number(id));
-  const {
-    data: commentsData,
-    isError: isCommentsError,
-    isLoading: isCommentsLoading,
-  } = useGetBlogComments(Number(id));
+  const { data: commentsData, isLoading: isCommentsLoading } =
+    useGetBlogComments(Number(id));
 
-  const {
-    data: userData,
-    isError: isUserError,
-    isLoading: isUserLoading,
-  } = useUserDetail(userId);
+  const { data: userData } = useUserDetail(userId);
 
   if (isError) {
     return (
