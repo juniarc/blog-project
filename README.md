@@ -1,5 +1,9 @@
 # Blog Application
 
+## Web link
+
+https://blog-project-ten-mu.vercel.app/
+
 ## Overview
 
 This is a blog website built with **Next.js (Page Router) and TypeScript**. The app fetches and displays blog data from the **GoRest API** and includes full CRUD functionality without page refresh. The UI is designed using **Tailwind CSS and Ant Design** while API calls are managed using **Axios and TanStack Query (v5)**.
