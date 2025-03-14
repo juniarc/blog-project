@@ -27,21 +27,6 @@ export const fetchBlogs = async (
   };
 };
 
-export const fetchUserBlogs = async (page: number = 1, userId: number) => {
-  const { data, headers } = await axiosInstance.get(`/users/${userId}/posts`, {
-    params: {
-      page,
-      per_page: 5,
-    },
-  });
-
-  return {
-    blogs: data,
-    totalItems: Number(headers["x-pagination-total"]),
-    totalPages: Number(headers["x-pagination-pages"]),
-  };
-};
-
 export const fetchBlogById = async (id: number) => {
   const { data } = await axiosInstance.get(`/posts/${id}`);
 
@@ -64,6 +49,21 @@ export const createBlog = async (body: BlogBodyRequest) => {
 
     throw new Error("Failed to create blog");
   }
+};
+
+export const fetchUserBlogs = async (page: number = 1, userId: number) => {
+  const { data, headers } = await axiosInstance.get(`/users/${userId}/posts`, {
+    params: {
+      page,
+      per_page: 5,
+    },
+  });
+
+  return {
+    blogs: data,
+    totalItems: Number(headers["x-pagination-total"]),
+    totalPages: Number(headers["x-pagination-pages"]),
+  };
 };
 
 export const createUser = async (body: UserBodyRequest) => {
@@ -94,18 +94,6 @@ export const editUser = async (body: UserBodyRequest, id: number) => {
 
     throw new Error("Failed to create user");
   }
-};
-
-export const fetchUsers = async () => {
-  const { data } = await axiosInstance.get("/users");
-
-  return data;
-};
-
-export const fetchUserById = async (id: number) => {
-  const { data } = await axiosInstance.get(`/users/${id}`);
-
-  return data;
 };
 
 export const editUserBlog = async (id: number, body: BlogBodyRequest) => {
@@ -157,4 +145,16 @@ export const addBlogComment = async (body: CommentBodyRequest, id: number) => {
 
     throw new Error("Failed to create user");
   }
+};
+
+export const fetchUsers = async () => {
+  const { data } = await axiosInstance.get("/users");
+
+  return data;
+};
+
+export const fetchUserById = async (id: number) => {
+  const { data } = await axiosInstance.get(`/users/${id}`);
+
+  return data;
 };

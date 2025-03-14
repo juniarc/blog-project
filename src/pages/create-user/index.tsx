@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useCreateUser } from "@/hooks/useCreateUser";
+import { useCreateUser } from "@/hooks/user/useCreateUser";
 import { UserBodyRequest } from "@/types/types";
 import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
 import UserForm from "@/_components/forms/UserForm";

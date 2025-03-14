@@ -4,7 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { fetchBlogs } from "@/api/gorestApi";
-import { useBlogs } from "@/hooks/useBlogs";
+import { useBlogs } from "@/hooks/blog/useBlogs";
 
 import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
 import HeroSection from "@/_containers/home/hero/HeroSection";

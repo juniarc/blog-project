@@ -1,6 +1,6 @@
 import NotFound from "@/_containers/not-found.tsx/NotFound";
-import { useUserDetail } from "@/hooks/useUserDetail";
-import { useUserBlogs } from "@/hooks/useUserBlogs";
+import { useUserDetail } from "@/hooks/user/useUserDetail";
+import { useUserBlogs } from "@/hooks/user/useUserBlogs";
 import { useRouter } from "next/router";
 import BlogsContainer from "@/_containers/my-profile/BlogsContainer";
 import UserDetailContainer from "@/_containers/my-profile/UserDetailContainer";

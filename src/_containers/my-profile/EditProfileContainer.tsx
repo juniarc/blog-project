@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { User, UserBodyRequest } from "@/types/types";
-import { useEditUser } from "@/hooks/useEditUser";
+import { useEditUser } from "@/hooks/user/useEditUser";
 import { useAuth } from "@/providers/AuthProvider";
 import UserForm from "@/_components/forms/UserForm";
 import OutlinedButton from "@/_components/buttons/OutlinedButton";

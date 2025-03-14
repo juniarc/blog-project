@@ -1,6 +1,6 @@
 import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
 import BlogForm from "@/_components/forms/BlogForm";
-import { useCreateBlog } from "@/hooks/useCreateBlog";
+import { useCreateBlog } from "@/hooks/blog/useCreateBlog";
 import { BlogBodyRequest } from "@/types/types";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";

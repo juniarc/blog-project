@@ -3,9 +3,9 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button, Modal, Spin } from "antd";
 import { useState } from "react";
 import { BiPencil, BiTrash } from "react-icons/bi";
-import { useEditBlog } from "@/hooks/useEditBlog";
+import { useEditBlog } from "@/hooks/blog/useEditBlog";
 import { BlogBodyRequest, Blog } from "@/types/types";
-import { useDeleteBlog } from "@/hooks/useDeleteBlog";
+import { useDeleteBlog } from "@/hooks/blog/useDeleteBlog";
 import ConfirmationModal from "@/_components/modals/ConfirmationModal";
 import BlogForm from "@/_components/forms/BlogForm";
 

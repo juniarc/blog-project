@@ -11,9 +11,9 @@ import {
   fetchBlogComments,
   fetchUserById,
 } from "@/api/gorestApi";
-import { useBlogDetail } from "@/hooks/useBlogDetail";
-import { useUserDetail } from "@/hooks/useUserDetail";
-import { useGetBlogComments } from "@/hooks/useGetBlogComments";
+import { useBlogDetail } from "@/hooks/blog/useBlogDetail";
+import { useUserDetail } from "@/hooks/user/useUserDetail";
+import { useGetBlogComments } from "@/hooks/blog/useGetBlogComments";
 import { getLastPathSegment } from "@/utils/utils";
 
 export const getServerSideProps: GetServerSideProps = async (
