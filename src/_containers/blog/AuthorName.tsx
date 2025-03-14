@@ -10,7 +10,7 @@ export default function AuthorName({
   user_id: Blog["user_id"];
 }) {
   return (
-    <div className="flex text-sm">
+    <div className="flex text-sm lg:w-1/4">
       <span className="text-gray-500 text-nowrap">Posted By: &nbsp;</span>
       {isLoading ? (
         <SingleLoading className="w-14 h-5" />

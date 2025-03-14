@@ -20,7 +20,7 @@ export default function BlogContent({
   isCommentsLoading: boolean;
 }) {
   return (
-    <div className="w-full lg:w-auto mt-5 lg:mt-0">
+    <div className="w-full mt-5 lg:mt-0 lg:w-3/4">
       {isLoading ? (
         <>
           <SingleLoading className="lg:w-[70vw] h-10" />
