@@ -8,13 +8,13 @@ export default function Footer() {
         <nav>
           <ul className="flex gap-4 text-xxs md:text-base">
             <li>
-              <a href="#">Home</a>
+              <a href="*">Home</a>
             </li>
             <li>
-              <a href="#">About</a>
+              <a href="*">About</a>
             </li>
             <li>
-              <a href="#">Privacy Policy</a>
+              <a href="*">Privacy Policy</a>
             </li>
           </ul>
         </nav>

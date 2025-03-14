@@ -1,7 +1,7 @@
 import BlogList from "@/_components/blogs/BlogList";
 import { GetBlogsResponse } from "@/types/types";
 
-export default function RightContainer({
+export default function BlogsContainer({
   initialPage,
   title,
   body,

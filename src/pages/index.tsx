@@ -1,19 +1,28 @@
-import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
-import HeroSection from "@/_containers/home/hero/HeroSection";
-import { GetServerSideProps } from "next";
-import { fetchBlogs } from "@/api/gorestApi";
+import type { NextRouter } from "next/router";
+
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import LeftContainer from "@/_containers/home/left/LeftContainer";
-import RightContainer from "@/_containers/home/right/RightContainer";
+import { fetchBlogs } from "@/api/gorestApi";
 import { useBlogs } from "@/hooks/useBlogs";
+
+import HorizontalDivider from "@/_components/dividers/HorizontalDivider";
+import HeroSection from "@/_containers/home/hero/HeroSection";
+import ButtonsContainer from "@/_containers/home/buttons/ButtonsContainer";
+import BlogsContainer from "@/_containers/home/blogs/BlogsContainer";
+
+const getQueryParams = (context: GetServerSidePropsContext | NextRouter) => {
+  const page = Number(context.query.page) || 1;
+  const title = context.query.title?.toString() || undefined;
+  const body = context.query.body?.toString() || undefined;
+
+  return { page, title, body };
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  const page = Number(context.query.page) || 1;
-  const title = context.query.title?.toString() || undefined;
-  const body = context.query.body?.toString() || undefined;
+  const { page, title, body } = getQueryParams(context);
 
   await queryClient.prefetchQuery({
     queryKey: ["blogs", title ?? null, body ?? null, page],
@@ -30,10 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Home() {
   const router = useRouter();
 
-  const page = Number(router.query.page) || 0;
-  const title = router.query.title?.toString() || undefined;
-  const body = router.query.body?.toString() || undefined;
-
+  const { page, title, body } = getQueryParams(router);
   const { data, isLoading } = useBlogs(page, title, body);
 
   return (
@@ -41,9 +47,9 @@ export default function Home() {
       <HeroSection />
       <HorizontalDivider className="mt-8 lg:mt-10" />
       <div className="mt-8 lg:mt-0 lg:flex lg:justify-between">
-        <LeftContainer />
+        <ButtonsContainer />
         <HorizontalDivider className="mt-8 lg:hidden" />
-        <RightContainer
+        <BlogsContainer
           data={data}
           initialPage={page}
           isLoading={isLoading}

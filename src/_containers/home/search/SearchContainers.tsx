@@ -1,7 +1,7 @@
 import Search from "@/_components/search/Search";
 import { useRouter } from "next/router";
 
-export default function SearchSection() {
+export default function SearchContainer() {
   const router = useRouter();
   const handleSearchTitle = (value: string) => {
     router.push(`/?title=${value}`);

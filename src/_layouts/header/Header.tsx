@@ -1,6 +1,6 @@
-import NavigationButton from "@/_components/buttons/NavigationButton";
 import Logo from "@/_components/logo/Logo";
 import { useAuth } from "@/providers/AuthProvider";
+import ProfileButton from "./ProfileButton";
 
 export default function Header() {
   const { userId } = useAuth();
@@ -11,11 +11,7 @@ export default function Header() {
         <div>
           <Logo />
         </div>
-        {userId ? (
-          <NavigationButton text="My Profile" href="/my-profile" />
-        ) : (
-          <NavigationButton text="Create User ID" href="/create-user" />
-        )}
+        <ProfileButton id={userId} />
       </div>
     </header>
   );
