@@ -1,12 +1,14 @@
-import { getCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie, setCookie } from "cookies-next";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext<{
   userId: number | null;
   updateUser: (id: number) => void;
+  deleteUser: () => void;
 }>({
   userId: null,
   updateUser: () => {},
+  deleteUser: () => {},
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -28,8 +30,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUserId(id);
   };
 
+  const deleteUser = () => {
+    deleteCookie("userId");
+    setUserId(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ userId, updateUser }}>
+    <AuthContext.Provider value={{ userId, updateUser, deleteUser }}>
       {children}
     </AuthContext.Provider>
   );
