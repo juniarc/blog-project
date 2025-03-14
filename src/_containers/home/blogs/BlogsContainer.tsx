@@ -3,14 +3,14 @@ import { GetBlogsResponse } from "@/types/types";
 
 export default function BlogsContainer({
   initialPage,
-  title,
-  body,
+  titleQuery,
+  bodyQuery,
   data,
   isLoading,
 }: {
   initialPage: number;
-  title: string | undefined;
-  body: string | undefined;
+  titleQuery: string | undefined;
+  bodyQuery: string | undefined;
   data: GetBlogsResponse | undefined;
   isLoading: boolean;
 }) {
@@ -24,8 +24,8 @@ export default function BlogsContainer({
         totalItems={data?.totalItems || 0}
         initialPage={initialPage}
         isLoading={isLoading}
-        title={title}
-        body={body}
+        titleQuery={titleQuery}
+        bodyQuery={bodyQuery}
       />
     </div>
   );

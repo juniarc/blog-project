@@ -2,20 +2,23 @@ import NotFound from "@/_containers/not-found.tsx/NotFound";
 import AuthorName from "@/_containers/blog/AuthorName";
 import BlogContent from "@/_containers/blog/BlogContent";
 import NavTrail from "@/_containers/blog/NavTrail";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 import {
   fetchBlogById,
   fetchBlogComments,
   fetchUserById,
 } from "@/api/gorestApi";
 import { useBlogDetail } from "@/hooks/useBlogDetail";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
 import { useUserDetail } from "@/hooks/useUserDetail";
-import { getCookie } from "cookies-next";
 import { useGetBlogComments } from "@/hooks/useGetBlogComments";
+import { getLastPathSegment } from "@/utils/utils";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const queryClient = new QueryClient();
 
   const id = context.params?.blogId;
@@ -50,9 +53,7 @@ export default function BlogDetail() {
   const userId = Number(getCookie("userId"));
   const router = useRouter();
 
-  const pathArray = router.asPath.split("/").filter((path) => path);
-  const lastPath = pathArray[pathArray.length - 1];
-  const id = decodeURIComponent(lastPath);
+  const id = getLastPathSegment(router);
 
   const { data, isError, isLoading } = useBlogDetail(Number(id));
   const { data: commentsData, isLoading: isCommentsLoading } =

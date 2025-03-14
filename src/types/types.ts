@@ -32,7 +32,7 @@ export interface User {
   status: "active" | "inactive";
 }
 
-export interface Comments {
+export interface Comment {
   id: number;
   post_id: number;
   name: string;

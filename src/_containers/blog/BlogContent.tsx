@@ -1,6 +1,6 @@
 import SingleLoading from "@/_components/loadings/SingleLoading";
 import CommentsContainer from "./CommentsContainer";
-import { Blog, Comments, User } from "@/types/types";
+import { Blog, Comment, User } from "@/types/types";
 
 export default function BlogContent({
   isLoading,
@@ -16,7 +16,7 @@ export default function BlogContent({
   body: Blog["body"];
   id: Blog["id"];
   user: User;
-  comments: Comments[] | undefined;
+  comments: Comment[] | undefined;
   isCommentsLoading: boolean;
 }) {
   return (

@@ -2,13 +2,13 @@ import AlertRenderer from "@/_components/alerts/AlertRenderer";
 import CommentList from "@/_components/comments/CommentList";
 import NavigationModal from "@/_components/modals/NavigationModal";
 import { useAddBlogComment } from "@/hooks/useAddBlogComment";
-import { Blog, Comments, User } from "@/types/types";
+import { Blog, Comment, User } from "@/types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import CommentForm, { FieldType } from "./CommentForm";
 
 interface CommentsContainerProps extends User {
-  comments: Comments[] | undefined;
+  comments: Comment[] | undefined;
   blog_id: Blog["id"];
   isCommentsLoading: boolean;
 }

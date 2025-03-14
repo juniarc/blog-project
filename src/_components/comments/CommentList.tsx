@@ -1,9 +1,9 @@
-import { Comments } from "@/types/types";
+import { Comment } from "@/types/types";
 import CommentItem from "./CommentItem";
 import CommentItemLoading from "../loadings/CommentItemLoading";
 
 interface CommentListProps {
-  comments: Comments[] | undefined;
+  comments: Comment[] | undefined;
   isLoading: boolean;
 }
 

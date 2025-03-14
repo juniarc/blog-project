@@ -10,8 +10,8 @@ export interface BlogListProps {
   initialPage: number;
   isLoading: boolean;
   otherLoading?: boolean;
-  title?: string;
-  body?: string;
+  titleQuery?: string;
+  bodyQuery?: string;
   additionalChildren?: boolean;
 }
 
@@ -22,8 +22,8 @@ export default function BlogList({
   initialPage,
   isLoading,
   otherLoading = false,
-  title,
-  body,
+  titleQuery,
+  bodyQuery,
   additionalChildren,
 }: BlogListProps) {
   return (
@@ -47,8 +47,8 @@ export default function BlogList({
         totalItems={totalItems}
         pageSize={pageSize}
         initialPage={initialPage}
-        title={title}
-        body={body}
+        title={titleQuery}
+        body={bodyQuery}
       />
     </div>
   );

@@ -53,8 +53,8 @@ export default function Home() {
           data={data}
           initialPage={page}
           isLoading={isLoading}
-          title={title}
-          body={body}
+          titleQuery={title}
+          bodyQuery={body}
         />
       </div>
     </main>
