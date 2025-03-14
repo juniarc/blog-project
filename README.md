@@ -17,6 +17,7 @@ This is a blog website built with **Next.js (Page Router) and TypeScript**. The 
 - Uses **Server-Side Rendering (SSR)** for better performance and hydrate to client.
 - **Error handling** to ensure a smooth experience.
 - **Secure authentication** using cookies.
+- Add middleware for path security
 
 ## Tech Stack
 
