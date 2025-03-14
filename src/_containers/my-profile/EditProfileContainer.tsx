@@ -1,12 +1,12 @@
-import OutlinedButton from "@/_components/buttons/OutlinedButton";
 import { Button, Modal } from "antd";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { User, UserBodyRequest } from "@/types/types";
 import { useEditUser } from "@/hooks/useEditUser";
-import { useQueryClient } from "@tanstack/react-query";
-import UserForm from "@/_components/forms/UserForm";
 import { useAuth } from "@/providers/AuthProvider";
-import { useRouter } from "next/router";
+import UserForm from "@/_components/forms/UserForm";
+import OutlinedButton from "@/_components/buttons/OutlinedButton";
 
 export default function EditProfileContainer({ user }: { user: User }) {
   const router = useRouter();
@@ -41,7 +41,7 @@ export default function EditProfileContainer({ user }: { user: User }) {
   };
 
   return (
-    <div className="flex justify-end lg:mt-5 gap-5">
+    <div className="flex justify-end mt-5 lg:mt-10 gap-5">
       <OutlinedButton
         text="Edit Profile"
         handleClick={() => setModalOpen(true)}
@@ -66,8 +66,8 @@ export default function EditProfileContainer({ user }: { user: User }) {
           onFinishHandler={handelFinish}
           submitText="Update Profile"
           isRequired={false}
-          succesMessage="Succesfuyl edit profile"
-          failedMessaged="Failed edit profle"
+          successMessage="Succesfully edit profile"
+          failedMessage="Failed edit profle"
         />
       </Modal>
       <Button onClick={handleLogout} danger>

@@ -2,6 +2,10 @@ import SingleLoading from "@/_components/loadings/SingleLoading";
 import EditProfileContainer from "./EditProfileContainer";
 import { User } from "@/types/types";
 
+interface UserDetailContainerProps extends User {
+  isUserLoading: boolean;
+}
+
 export default function UserDetailContainer({
   isUserLoading,
   name,
@@ -9,21 +13,14 @@ export default function UserDetailContainer({
   gender,
   id,
   status,
-}: {
-  isUserLoading: boolean;
-  name: User["name"];
-  email: User["email"];
-  gender: User["gender"];
-  id: User["id"];
-  status: User["status"];
-}) {
+}: UserDetailContainerProps) {
   return (
     <>
       <h2 className="font-bold text-3xl lg:text-5xl mt-5 lg:mt-10">
         My Profile
       </h2>
 
-      <div className="w-full mt-5 lg:mt-5 flex flex-col gap-3">
+      <div className="w-full mt-5 lg:mt-10 flex flex-col gap-3">
         <div className="w-full flex">
           <p className="w-1/3 font-bold text-xs md:text-base">Name</p>
           {isUserLoading ? (

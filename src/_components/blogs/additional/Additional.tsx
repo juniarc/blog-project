@@ -1,13 +1,13 @@
-import ConfirmationModal from "@/_components/modals/ConfirmationModal";
-import BlogForm from "@/_components/forms/BlogForm";
-import { useEditBlog } from "@/hooks/useEditBlog";
-import { BlogBodyRequest, Blog } from "@/types/types";
+import { useRouter } from "next/router";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button, Modal, Spin } from "antd";
 import { useState } from "react";
 import { BiPencil, BiTrash } from "react-icons/bi";
+import { useEditBlog } from "@/hooks/useEditBlog";
+import { BlogBodyRequest, Blog } from "@/types/types";
 import { useDeleteBlog } from "@/hooks/useDeleteBlog";
-import { useRouter } from "next/router";
+import ConfirmationModal from "@/_components/modals/ConfirmationModal";
+import BlogForm from "@/_components/forms/BlogForm";
 
 export default function Additional({ blog }: { blog: Blog }) {
   const router = useRouter();
@@ -98,10 +98,10 @@ export default function Additional({ blog }: { blog: Blog }) {
             isError={isError}
             isSuccess={isSuccess}
             onFinishHandler={handleFinish}
-            submitText="Update Profile"
+            submitText="Update Blog"
             isRequired={false}
-            succesMessage="Succesfuyl edit profile"
-            failedMessaged="Failed edit profle"
+            successMessage="Succesfully edit blog"
+            failedMessage="Failed edit blog"
             handleCloseModal={() => {}}
             handleOpenModal={() => {}}
           />

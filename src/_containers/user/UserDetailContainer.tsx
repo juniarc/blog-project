@@ -17,7 +17,7 @@ export default function UserDetailContainer({
         User Detail
       </h2>
 
-      <div className="w-full mt-5 lg:mt-5 flex flex-col gap-3">
+      <div className="w-full mt-5 lg:mt-10 flex flex-col gap-3">
         <div className="w-full flex">
           <p className="w-1/3 font-bold text-xs md:text-base">Name</p>
           {isUserLoading ? (

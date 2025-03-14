@@ -4,9 +4,8 @@ import { useUserBlogs } from "@/hooks/useUserBlogs";
 import { useRouter } from "next/router";
 import BlogsContainer from "@/_containers/my-profile/BlogsContainer";
 import UserDetailContainer from "@/_containers/my-profile/UserDetailContainer";
-import SingleLoading from "@/_components/loadings/SingleLoading";
-import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
 import { getCookie } from "cookies-next";
+import NavTrail from "@/_containers/my-profile/NavTrail";
 
 export default function MyProfilePage() {
   const id = Number(getCookie("userId"));
@@ -38,11 +37,7 @@ export default function MyProfilePage() {
     <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
       <div className="w-full lg:flex">
         <div className="lg:w-1/3 lg:min-h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
-          {isUserLoading ? (
-            <SingleLoading className="w-[70vw] md:w-96 h-5" />
-          ) : (
-            <BreadcrumbNav pathname="my-profile" />
-          )}
+          <NavTrail isLoading={isUserLoading} />
           <UserDetailContainer {...user} isUserLoading={isUserLoading} />
         </div>
         <BlogsContainer

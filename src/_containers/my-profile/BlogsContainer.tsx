@@ -1,5 +1,5 @@
-import SingleLoading from "@/_components/loadings/SingleLoading";
 import { GetBlogsResponse } from "@/types/types";
+import SingleLoading from "@/_components/loadings/SingleLoading";
 import NotFound from "../not-found.tsx/NotFound";
 import BlogList from "@/_components/blogs/BlogList";
 import NavigationButton from "@/_components/buttons/NavigationButton";
@@ -25,9 +25,23 @@ export default function BlogsContainer({
           <SingleLoading className="w-full h-8 mt-2" />
         </>
       ) : (
-        <h2 className="font-bold text-3xl lg:text-5xl lg:mt-[62px] capitalize">
-          Your Blogs
-        </h2>
+        <div className="flex justify-between items-center lg:mt-[62px]">
+          <h2 className="font-bold text-3xl lg:text-5xl  capitalize">
+            Your Blogs
+          </h2>
+          <>
+            <NavigationButton
+              text="Create Blog"
+              href="/create-blog"
+              className="w-48 hidden md:flex"
+            />
+            <NavigationButton
+              text="+"
+              href="/create-blog"
+              className="w-9 md:hidden"
+            />
+          </>
+        </div>
       )}
       <section>
         {isBlogError || data?.totalItems === 0 ? (
