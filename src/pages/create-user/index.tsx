@@ -1,9 +1,9 @@
-import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
-import UserForm from "@/_components/forms/UserForm";
-import { useCreateUser } from "@/hooks/useCreateUser";
-import { UserBodyRequest } from "@/types/types";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useCreateUser } from "@/hooks/useCreateUser";
+import { UserBodyRequest } from "@/types/types";
+import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
+import UserForm from "@/_components/forms/UserForm";
 
 export default function CreateUserPage() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function CreateUserPage() {
           </h2>
           <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
             <UserForm
-              className="w-1/2"
+              className="w-full lg:w-1/2"
               openAlert={openAlert}
               isPending={isPending}
               error={error}
@@ -46,8 +46,8 @@ export default function CreateUserPage() {
               isSuccess={isSuccess}
               onFinishHandler={handleFinish}
               isRequired={true}
-              succesMessage="Succesfuyl create user"
-              failedMessaged="Failed create user"
+              failedMessage="Failed to create user"
+              successMessage="User added successfully"
             />
           </div>
         </div>

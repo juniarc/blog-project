@@ -1,9 +1,8 @@
-import FailAlert from "@/_components/alerts/FailAlert";
-import SuccessAlert from "@/_components/alerts/SuccesAlert";
 import ColoredButton from "@/_components/buttons/ColoredButton";
 import { UserBodyRequest } from "@/types/types";
 import { Form, Input, Select, Spin } from "antd";
 import { FormProps } from "antd";
+import AlertRenderer from "../alerts/AlertRenderer";
 
 type FieldType = UserBodyRequest;
 
@@ -18,8 +17,8 @@ interface UserFormProps {
   error: unknown;
   className?: string;
   openAlert: boolean;
-  succesMessage: string;
-  failedMessaged: string;
+  successMessage: string;
+  failedMessage: string;
 }
 
 export default function UserForm({
@@ -33,8 +32,8 @@ export default function UserForm({
   className = "w-1/2",
   openAlert,
   isRequired = true,
-  succesMessage,
-  failedMessaged,
+  successMessage,
+  failedMessage,
 }: UserFormProps) {
   const { Option } = Select;
 
@@ -44,29 +43,6 @@ export default function UserForm({
     console.log("Failed:", errorInfo);
   };
 
-  const renderAlert = () => {
-    if (!openAlert) return null;
-
-    if (isError) {
-      return (
-        <FailAlert
-          message={
-            (error as { field: string; message: string }[])?.[0]?.message
-              ? `${(error as { field: string; message: string }[])[0].field} ${
-                  (error as { field: string; message: string }[])[0].message
-                }`
-              : failedMessaged
-          }
-        />
-      );
-    }
-
-    if (isSuccess) {
-      return <SuccessAlert message={succesMessage} />;
-    }
-
-    return null;
-  };
   return (
     <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
       <div className={className}>
@@ -125,7 +101,14 @@ export default function UserForm({
             />
           </div>
         </Form>
-        {renderAlert()}
+        <AlertRenderer
+          openAlert={openAlert}
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error}
+          failedMessage={failedMessage}
+          successMessage={successMessage}
+        />
       </div>
     </div>
   );
