@@ -8,7 +8,6 @@ interface BlogItemProps extends Blog {
 
 export default function BlogItem({
   id,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   user_id,
   title,
   body,

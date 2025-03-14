@@ -1,4 +1,5 @@
 import SingleLoading from "@/_components/loadings/SingleLoading";
+import { Blog } from "@/types/types";
 import Link from "next/link";
 
 export default function AuthorName({
@@ -6,7 +7,7 @@ export default function AuthorName({
   user_id,
 }: {
   isLoading: boolean;
-  user_id: number;
+  user_id: Blog["user_id"];
 }) {
   return (
     <div className="flex text-sm">

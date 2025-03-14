@@ -1,4 +1,8 @@
-import { BlogBodyRequest, UserBodyRequest } from "@/types/types";
+import {
+  BlogBodyRequest,
+  CommentBodyRequest,
+  UserBodyRequest,
+} from "@/types/types";
 import axiosInstance from "./axiosInstance";
 import { AxiosError } from "axios";
 
@@ -39,7 +43,6 @@ export const fetchUserBlogs = async (page: number = 1, userId: number) => {
 };
 
 export const fetchBlogById = async (id: number) => {
-  console.log(id);
   const { data } = await axiosInstance.get(`/posts/${id}`);
 
   return data;
@@ -123,6 +126,27 @@ export const editUserBlog = async (id: number, body: BlogBodyRequest) => {
 export const deleteUserBlog = async (id: number) => {
   try {
     const { data } = await axiosInstance.delete(`/posts/${id}`);
+
+    return data;
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response?.data) {
+      throw axiosError.response.data;
+    }
+
+    throw new Error("Failed to create user");
+  }
+};
+
+export const fetchBlogComments = async (id: number) => {
+  const { data } = await axiosInstance.get(`/posts/${id}/comments`);
+
+  return data;
+};
+
+export const addBlogComment = async (body: CommentBodyRequest, id: number) => {
+  try {
+    const { data } = await axiosInstance.post(`/posts/${id}/comments`, body);
 
     return data;
   } catch (error) {

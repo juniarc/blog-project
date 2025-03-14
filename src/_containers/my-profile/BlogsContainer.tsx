@@ -29,7 +29,7 @@ export default function BlogsContainer({
           Your Blogs
         </h2>
       )}
-      <div>
+      <section>
         {isBlogError || data?.totalItems === 0 ? (
           <div className="flex flex-col items-center justify-center px-4 mt-20">
             <NotFound text="You haven’t posted anything yet." />
@@ -49,7 +49,7 @@ export default function BlogsContainer({
             additionalChildren={true}
           />
         )}
-      </div>
+      </section>
     </div>
   );
 }

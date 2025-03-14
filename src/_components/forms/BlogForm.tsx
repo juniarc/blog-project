@@ -6,6 +6,7 @@ import { BlogBodyRequest } from "@/types/types";
 import { Form, Input, Spin } from "antd";
 import { FormProps } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import AlertRenderer from "../alerts/AlertRenderer";
 
 type FieldType = BlogBodyRequest;
 
@@ -50,27 +51,27 @@ export default function BlogForm({
     console.log("Failed:", errorInfo);
   };
 
-  const renderAlert = () => {
-    if (!openAlert) return null;
+  // const renderAlert = () => {
+  //   if (!openAlert) return null;
 
-    if (isError) {
-      return (
-        <FailAlert
-          message={
-            error?.[0]?.message
-              ? `${error?.[0]?.field + " " + error?.[0]?.message}`
-              : failedMessaged
-          }
-        />
-      );
-    }
+  //   if (isError) {
+  //     return (
+  //       <FailAlert
+  //         message={
+  //           error?.[0]?.message
+  //             ? `${error?.[0]?.field + " " + error?.[0]?.message}`
+  //             : failedMessaged
+  //         }
+  //       />
+  //     );
+  //   }
 
-    if (isSuccess) {
-      return <SuccessAlert message={succesMessage} />;
-    }
+  //   if (isSuccess) {
+  //     return <SuccessAlert message={succesMessage} />;
+  //   }
 
-    return null;
-  };
+  //   return null;
+  // };
 
   return (
     <div className="w-full sm:flex justify-center mt-5 lg:mt-10">
@@ -121,7 +122,14 @@ export default function BlogForm({
             handleCancel={handleCloseModal}
           />
         )}
-        {renderAlert()}
+        <AlertRenderer
+          openAlert={openAlert}
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error}
+          failedMessage={failedMessaged}
+          successMessage={succesMessage}
+        />
       </div>
     </div>
   );

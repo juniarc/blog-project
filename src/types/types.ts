@@ -31,3 +31,17 @@ export interface User {
   gender: string;
   status: "active" | "inactive";
 }
+
+export interface Comments {
+  id: number;
+  post_id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
+export interface CommentBodyRequest {
+  name: string;
+  email: string;
+  body: string;
+}

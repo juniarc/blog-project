@@ -1,13 +1,23 @@
 import SingleLoading from "@/_components/loadings/SingleLoading";
+import CommentsContainer from "./CommentsContainer";
+import { Blog, Comments, User } from "@/types/types";
 
 export default function BlogContent({
   isLoading,
   title,
   body,
+  user,
+  comments,
+  id,
+  isCommentsLoading,
 }: {
   isLoading: boolean;
-  title: string;
-  body: string;
+  title: Blog["title"];
+  body: Blog["body"];
+  id: Blog["id"];
+  user: User;
+  comments: Comments[] | undefined;
+  isCommentsLoading: boolean;
 }) {
   return (
     <div className="w-full lg:w-auto mt-5 lg:mt-0">
@@ -20,12 +30,18 @@ export default function BlogContent({
         </>
       ) : (
         <>
-          <h2 className="font-bold text-xl lg:text-4xl">{title}</h2>
+          <h2 className="font-bold text-xl lg:text-4xl capitalize">{title}</h2>
           <p className="mt-5 lg:mt-10 text-sm lg:text-base text-justify">
             {body}
           </p>
         </>
       )}
+      <CommentsContainer
+        {...user}
+        comments={comments}
+        blog_id={id}
+        isCommentsLoading={isCommentsLoading}
+      />
     </div>
   );
 }
