@@ -1,16 +1,16 @@
 import SingleLoading from "@/_components/loadings/SingleLoading";
+import { User } from "@/types/types";
+
+interface UserDetailContainer extends User {
+  isUserLoading: boolean | undefined;
+}
 
 export default function UserDetailContainer({
   isUserLoading,
   name,
   email,
   gender,
-}: {
-  isUserLoading: boolean | undefined;
-  name: string | undefined;
-  email: string | undefined;
-  gender: string | undefined;
-}) {
+}: UserDetailContainer) {
   return (
     <>
       <h2 className="font-bold text-3xl lg:text-5xl mt-5 lg:mt-10">

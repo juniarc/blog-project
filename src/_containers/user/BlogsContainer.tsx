@@ -1,5 +1,5 @@
 import SingleLoading from "@/_components/loadings/SingleLoading";
-import { GetBlogsResponse } from "@/types/types";
+import { GetBlogsResponse, User } from "@/types/types";
 import NotFound from "../not-found.tsx/NotFound";
 import BlogList from "@/_components/blogs/BlogList";
 
@@ -12,7 +12,7 @@ export default function BlogsContainer({
   isBlogLoading,
 }: {
   isUserLoading: boolean;
-  name: string | undefined;
+  name: User["name"] | undefined;
   isBlogError: boolean;
   isBlogLoading: boolean;
   data: GetBlogsResponse | undefined;

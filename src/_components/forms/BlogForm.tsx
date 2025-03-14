@@ -1,12 +1,10 @@
-import FailAlert from "@/_components/alerts/FailAlert";
-import SuccessAlert from "@/_components/alerts/SuccesAlert";
-import ColoredButton from "@/_components/buttons/ColoredButton";
-import NavigationModal from "@/_components/modals/NavigationModal";
-import { BlogBodyRequest } from "@/types/types";
 import { Form, Input, Spin } from "antd";
 import { FormProps } from "antd";
+import { BlogBodyRequest } from "@/types/types";
+import ColoredButton from "@/_components/buttons/ColoredButton";
+import NavigationModal from "@/_components/modals/NavigationModal";
 import TextArea from "antd/es/input/TextArea";
-// import AlertRenderer from "../alerts/AlertRenderer";
+import AlertRenderer from "../alerts/AlertRenderer";
 
 type FieldType = BlogBodyRequest;
 
@@ -21,8 +19,8 @@ interface BlogFormProps {
   error: unknown;
   className?: string;
   openAlert: boolean;
-  succesMessage: string;
-  failedMessaged: string;
+  successMessage: string;
+  failedMessage: string;
   isModalOpen?: boolean;
   handleOpenModal: () => void;
   handleCloseModal: () => void;
@@ -39,8 +37,8 @@ export default function BlogForm({
   className = "w-1/2",
   openAlert,
   isRequired = true,
-  succesMessage,
-  failedMessaged,
+  successMessage,
+  failedMessage,
   isModalOpen,
   handleCloseModal,
 }: BlogFormProps) {
@@ -48,30 +46,6 @@ export default function BlogForm({
     errorInfo
   ) => {
     console.log("Failed:", errorInfo);
-  };
-
-  const renderAlert = () => {
-    if (!openAlert) return null;
-
-    if (isError) {
-      return (
-        <FailAlert
-          message={
-            (error as { field: string; message: string }[])?.[0]?.message
-              ? `${(error as { field: string; message: string }[])[0].field} ${
-                  (error as { field: string; message: string }[])[0].message
-                }`
-              : failedMessaged
-          }
-        />
-      );
-    }
-
-    if (isSuccess) {
-      return <SuccessAlert message={succesMessage} />;
-    }
-
-    return null;
   };
 
   return (
@@ -123,15 +97,14 @@ export default function BlogForm({
             handleCancel={handleCloseModal}
           />
         )}
-        {/* <AlertRenderer
+        <AlertRenderer
           openAlert={openAlert}
           isError={isError}
           isSuccess={isSuccess}
           error={error}
-          failedMessage={failedMessaged}
-          successMessage={succesMessage}
-        /> */}
-        {renderAlert()}
+          failedMessage={failedMessage}
+          successMessage={successMessage}
+        />
       </div>
     </div>
   );

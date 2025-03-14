@@ -1,20 +1,26 @@
-import NotFound from "@/_containers/not-found.tsx/NotFound";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
 import { fetchUserById, fetchUserBlogs } from "@/api/gorestApi";
 import { useUserDetail } from "@/hooks/useUserDetail";
 import { useUserBlogs } from "@/hooks/useUserBlogs";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import { getLastPathSegment } from "@/utils/utils";
+import NotFound from "@/_containers/not-found.tsx/NotFound";
 import BlogsContainer from "@/_containers/user/BlogsContainer";
 import UserDetailContainer from "@/_containers/user/UserDetailContainer";
-import SingleLoading from "@/_components/loadings/SingleLoading";
-import BreadcrumbNav from "@/_components/breadcrumbs/BreadcrumbNav";
+import NavTrail from "@/_containers/user/NavTrail";
+
+const getQueryParams = (context: GetServerSidePropsContext) => {
+  const id = Number(context.params?.userId);
+  const page = Number(context.query.page) || 1;
+
+  return { id, page };
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
-  const id = Number(context.params?.userId);
-  const page = Number(context.query.page) || 1;
+  const { id, page } = getQueryParams(context);
 
   await Promise.all([
     queryClient.prefetchQuery({
@@ -37,9 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function BlogDetail() {
   const router = useRouter();
 
-  const pathArray = router.asPath.split("/").filter((path) => path);
-  const lastPath = pathArray[pathArray.length - 1];
-  const id = decodeURIComponent(lastPath);
+  const id = getLastPathSegment(router);
 
   const {
     data: user,
@@ -66,11 +70,7 @@ export default function BlogDetail() {
     <main className="px-4 md:px-5 lg:px-20 min-h-screen lg:h-auto">
       <div className="w-full lg:flex">
         <div className="lg:w-1/3 lg:h-screen lg:border-e lg:border-e-black lg:py-5 lg:pr-10 mt-5 lg:mt-0">
-          {isUserLoading ? (
-            <SingleLoading className="w-[70vw] md:w-96 h-5" />
-          ) : (
-            <BreadcrumbNav pathname={`users/${user.name}`} />
-          )}
+          <NavTrail isUserLoading={isUserLoading} name={user?.name} />
           <UserDetailContainer {...user} isUserLoading={isUserLoading} />
         </div>
         <BlogsContainer

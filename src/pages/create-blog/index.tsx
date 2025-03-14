@@ -49,14 +49,14 @@ export default function CreateBlogPage() {
 
   return (
     <main className="w-screen flex justify-center p-4 md:p-5 lg:px-20 overflow-hidden">
-      <div className="w-full h-screen flex flex-col">
+      <div className="w-full min-h-screen flex flex-col">
         <BreadcrumbNav pathname={router.pathname} />
         <div className="w-full mt-8">
           <h2 className="font-bold text-3xl lg:text-5xl text-center">
             Create Blog
           </h2>
           <BlogForm
-            className="w-1/2"
+            className="w-full lg:w-1/2"
             openAlert={openAlert}
             isPending={isPending}
             error={error}
@@ -64,8 +64,8 @@ export default function CreateBlogPage() {
             isSuccess={isSuccess}
             onFinishHandler={handleFinish}
             isRequired={true}
-            succesMessage="Succesfuyl create user"
-            failedMessaged="Failed create user"
+            failedMessage="Failed to create blog"
+            successMessage="Blog created successfully"
             isModalOpen={isModalOpen}
             handleCloseModal={handleCancel}
             handleOpenModal={showModal}
