@@ -24,8 +24,10 @@ const AlertRenderer = ({
     return (
       <FailAlert
         message={
-          error?.[0]?.message
-            ? `${error?.[0]?.field + " " + error?.[0]?.message}`
+          (error as { field: string; message: string }[])?.[0]?.message
+            ? `${(error as { field: string; message: string }[])[0].field} ${
+                (error as { field: string; message: string }[])[0].message
+              }`
             : failedMessage
         }
       />
