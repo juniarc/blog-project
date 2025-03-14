@@ -6,7 +6,7 @@ export function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const userId = getCookie("userId", { req });
 
-  if (url.pathname === "/blogs") {
+  if (url.pathname === "/blogs" || url.pathname === "/users") {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
@@ -23,7 +23,3 @@ export function middleware(req: NextRequest) {
   }
   return NextResponse.next();
 }
-
-// export const config = {
-//   matcher: "/blogs",
-// };

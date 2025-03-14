@@ -35,3 +35,19 @@ This is a blog website built with **Next.js (Page Router) and TypeScript**. The 
 ✔️ Error handling and user-friendly messages.
 ✔️ No console errors or warnings.
 ✔️ Responsive and accessible UI.
+
+## Performance
+
+These performance were tested with Lighthouse for pages that need data from Go Rest API.
+
+### Home Page Performance
+
+![Home Page Performance](public/images/lh-home.png)
+
+### Blog Detail Page Performance
+
+![Blog Detail Page Performance](public/images/lh-blog-detail.png)
+
+### User Detail Page Performance
+
+![User Detail Page Performance](public/images/lh-user-detail.png)
